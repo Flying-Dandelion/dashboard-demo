@@ -205,125 +205,73 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   </div>
 </div>
 
-<!-- 核销T+N完成率 -->
+<!-- 核销风险金额 -->
 <div class="section">
-  <div class="section-title green">核销完成率监控（按账期）</div>
-  <div class="card chart">
-    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;">
-      <div class="card-title" style="margin-bottom:0;">各账期待核销金额（柱）& 核销完成率（折线）</div>
-      <div style="display:flex;gap:16px;">
-        <div class="line-leg-item"><div style="width:28px;height:3px;background:#1a73e8;border-radius:2px;"></div><span style="font-size:10px;color:#595959;margin-left:4px;">完成率（右轴）</span></div>
-        <div class="line-leg-item"><div style="width:12px;height:12px;background:#ff7875;border-radius:2px;"></div><span style="font-size:10px;color:#595959;margin-left:4px;">超期</span></div>
-        <div class="line-leg-item"><div style="width:12px;height:12px;background:#ffd591;border-radius:2px;"></div><span style="font-size:10px;color:#595959;margin-left:4px;">T+3临近</span></div>
-        <div class="line-leg-item"><div style="width:12px;height:12px;background:#b7d4f8;border-radius:2px;"></div><span style="font-size:10px;color:#595959;margin-left:4px;">进行中</span></div>
-      </div>
+  <div class="section-title green">核销风险金额</div>
+  <div class="cards cards-2">
+
+    <div class="card alert">
+      <div class="card-label">🔴 超T+3超期未核销金额（应收+应付）</div>
+      <div class="card-value">3.8<span style="font-size:16px;font-weight:400"> 万</span></div>
+      <div class="card-sub"><span class="down">已超截止时点 · 大于0即预警 · 需逐笔跟进</span></div>
     </div>
-    <svg width="100%" height="150" viewBox="0 0 540 150">
-      <!-- 网格 -->
-      <line x1="62" y1="10" x2="62" y2="105" stroke="#f0f0f0" stroke-width="1"/>
-      <line x1="62" y1="105" x2="510" y2="105" stroke="#e8eaed" stroke-width="1"/>
-      <line x1="62" y1="82" x2="510" y2="82" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,2"/>
-      <line x1="62" y1="57" x2="510" y2="57" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,2"/>
-      <line x1="62" y1="32" x2="510" y2="32" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,2"/>
-      <!-- 左轴（金额） -->
-      <text x="56" y="108" font-size="9" fill="#bfbfbf" text-anchor="end">0</text>
-      <text x="56" y="85" font-size="9" fill="#bfbfbf" text-anchor="end">15万</text>
-      <text x="56" y="60" font-size="9" fill="#bfbfbf" text-anchor="end">30万</text>
-      <text x="56" y="35" font-size="9" fill="#bfbfbf" text-anchor="end">45万</text>
-      <!-- 右轴（完成率） -->
-      <text x="516" y="108" font-size="9" fill="#1a73e8" text-anchor="start">0%</text>
-      <text x="516" y="60" font-size="9" fill="#1a73e8" text-anchor="start">50%</text>
-      <text x="516" y="15" font-size="9" fill="#1a73e8" text-anchor="start">100%</text>
 
-      <!-- 2025-12：3.8万超期，红色 h=3.8/45*95=8 y=97 -->
-      <rect x="83" y="97" width="44" height="8" fill="#ff7875" rx="3"/>
-      <text x="105" y="94" font-size="9" fill="#ff4d4f" text-anchor="middle" font-weight="600">3.8万</text>
+    <div class="card" style="border-left:3px solid #faad14;">
+      <div class="card-label">⚠️ 超T+1未核销金额（应收+应付）</div>
+      <div class="card-value" style="color:#fa8c16;">42.3<span style="font-size:16px;font-weight:400;color:#8c8c8c"> 万</span></div>
+      <div class="card-sub">进度偏慢 · 存在T+3无法完成风险</div>
+    </div>
 
-      <!-- 2026-01：21.8万T+2，橙色 h=21.8/45*95=46 y=59 -->
-      <rect x="193" y="59" width="44" height="46" fill="#ffd591" rx="3"/>
-      <text x="215" y="56" font-size="9" fill="#fa8c16" text-anchor="middle" font-weight="600">21.8万</text>
-
-      <!-- 2026-02：42.3万T+1，蓝浅 h=42.3/45*95=89 y=16 -->
-      <rect x="303" y="16" width="44" height="89" fill="#b7d4f8" rx="3"/>
-      <text x="325" y="13" font-size="9" fill="#1a73e8" text-anchor="middle" font-weight="600">42.3万</text>
-
-      <!-- 2026-03：20.6万当期，灰蓝 h=20.6/45*95=43 y=62 -->
-      <rect x="413" y="62" width="44" height="43" fill="#dce8fc" rx="3"/>
-      <text x="435" y="59" font-size="9" fill="#595959" text-anchor="middle" font-weight="600">20.6万</text>
-
-      <!-- 完成率折线 98/85/62/35% y=105-rate*95/100 -->
-      <!-- 98%: y=105-93=12  85%: y=105-80.75=24  62%: y=105-58.9=46  35%: y=105-33.25=72 -->
-      <polyline points="105,12 215,24 325,46 435,72" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
-      <circle cx="105" cy="12" r="4" fill="#ff4d4f" stroke="#ff4d4f" stroke-width="2"/>
-      <circle cx="215" cy="24" r="4" fill="#fff" stroke="#1a73e8" stroke-width="2"/>
-      <circle cx="325" cy="46" r="4" fill="#fff" stroke="#1a73e8" stroke-width="2"/>
-      <circle cx="435" cy="72" r="4" fill="#fff" stroke="#1a73e8" stroke-width="2"/>
-      <text x="105" y="9" font-size="10" fill="#ff4d4f" text-anchor="middle" font-weight="600">98%⚠️</text>
-      <text x="215" y="21" font-size="10" fill="#1a73e8" text-anchor="middle" font-weight="600">85%</text>
-      <text x="325" y="43" font-size="10" fill="#1a73e8" text-anchor="middle" font-weight="600">62%</text>
-      <text x="435" y="69" font-size="10" fill="#595959" text-anchor="middle" font-weight="600">35%</text>
-
-      <!-- 100%目标线 -->
-      <line x1="62" y1="10" x2="510" y2="10" stroke="#ff4d4f" stroke-width="1" stroke-dasharray="5,3" opacity="0.35"/>
-      <text x="64" y="9" font-size="8" fill="#ff4d4f" opacity="0.6">100%目标</text>
-
-      <!-- X轴账期标签 -->
-      <text x="105" y="120" font-size="10" fill="#ff4d4f" text-anchor="middle" font-weight="600">2025-12</text>
-      <text x="105" y="131" font-size="9" fill="#ff4d4f" text-anchor="middle">T+3截止·超期</text>
-      <text x="215" y="120" font-size="10" fill="#fa8c16" text-anchor="middle" font-weight="600">2026-01</text>
-      <text x="215" y="131" font-size="9" fill="#fa8c16" text-anchor="middle">T+3临近</text>
-      <text x="325" y="120" font-size="10" fill="#1a73e8" text-anchor="middle" font-weight="600">2026-02</text>
-      <text x="325" y="131" font-size="9" fill="#8c8c8c" text-anchor="middle">T+1进行中</text>
-      <text x="435" y="120" font-size="10" fill="#595959" text-anchor="middle" font-weight="600">2026-03</text>
-      <text x="435" y="131" font-size="9" fill="#8c8c8c" text-anchor="middle">当期</text>
-    </svg>
-    <div style="font-size:11px;color:#8c8c8c;margin-top:4px;">柱高=待核销余额；折线=核销完成率（右轴）；2025-12已超T+3截止时点，超期金额大于0即预警</div>
   </div>
 </div>
 
 <!-- 趋势监控 -->
 <div class="section">
   <div class="section-title">趋势监控（近3期）</div>
-  <div class="cards cards-2">
-
-    <div class="card chart">
-      <div class="card-title">核对异常趋势</div>
-      <svg width="100%" height="80" viewBox="0 0 260 80">
-        <polyline points="20,20 130,35 240,50" fill="none" stroke="#ff4d4f" stroke-width="2"/>
-        <circle cx="20" cy="20" r="3" fill="#ff4d4f"/>
-        <circle cx="130" cy="35" r="3" fill="#ff4d4f"/>
-        <circle cx="240" cy="50" r="3" fill="#ff4d4f"/>
-        <text x="20" y="14" font-size="9" fill="#ff4d4f" text-anchor="middle">7</text>
-        <text x="130" y="29" font-size="9" fill="#ff4d4f" text-anchor="middle">5</text>
-        <text x="240" y="44" font-size="9" fill="#ff4d4f" text-anchor="middle">3</text>
-        <text x="130" y="72" font-size="10" fill="#52c41a" text-anchor="middle">↓ 数据质量持续改善</text>
-      </svg>
-      <div class="line-labels">
-        <span class="line-label">2026-01</span>
-        <span class="line-label">2026-02</span>
-        <span class="line-label">2026-03</span>
+  <div class="card chart">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;">
+      <div class="card-title" style="margin-bottom:0;">计费成功率 & 核对异常数趋势</div>
+      <div style="display:flex;gap:16px;">
+        <div class="line-leg-item"><div class="line-leg-dot" style="background:#1a73e8"></div><span style="font-size:10px;color:#595959;margin-left:4px;">计费成功率（左轴）</span></div>
+        <div class="line-leg-item"><div class="line-leg-dot" style="background:#ff4d4f"></div><span style="font-size:10px;color:#595959;margin-left:4px;">核对异常数（右轴）</span></div>
       </div>
     </div>
-
-    <div class="card chart">
-      <div class="card-title">计费任务成功率趋势</div>
-      <svg width="100%" height="80" viewBox="0 0 260 80">
-        <polyline points="20,50 130,30 240,12" fill="none" stroke="#1a73e8" stroke-width="2"/>
-        <circle cx="20" cy="50" r="3" fill="#1a73e8"/>
-        <circle cx="130" cy="30" r="3" fill="#1a73e8"/>
-        <circle cx="240" cy="12" r="3" fill="#1a73e8"/>
-        <text x="20" y="44" font-size="9" fill="#1a73e8" text-anchor="middle">78%</text>
-        <text x="130" y="24" font-size="9" fill="#1a73e8" text-anchor="middle">84%</text>
-        <text x="240" y="8" font-size="9" fill="#1a73e8" text-anchor="middle">88%</text>
-        <text x="130" y="72" font-size="10" fill="#52c41a" text-anchor="middle">↑ 系统趋稳</text>
-      </svg>
-      <div class="line-labels">
-        <span class="line-label">2026-01</span>
-        <span class="line-label">2026-02</span>
-        <span class="line-label">2026-03</span>
-      </div>
-    </div>
-
+    <svg width="100%" height="100" viewBox="0 0 400 100">
+      <!-- 网格 -->
+      <line x1="40" y1="10" x2="380" y2="10" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,2"/>
+      <line x1="40" y1="40" x2="380" y2="40" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,2"/>
+      <line x1="40" y1="70" x2="380" y2="70" stroke="#f5f5f5" stroke-width="1" stroke-dasharray="4,2"/>
+      <line x1="40" y1="85" x2="380" y2="85" stroke="#e8eaed" stroke-width="1"/>
+      <!-- 左轴（成功率%） -->
+      <text x="34" y="13" font-size="9" fill="#1a73e8" text-anchor="end">100%</text>
+      <text x="34" y="43" font-size="9" fill="#1a73e8" text-anchor="end">70%</text>
+      <text x="34" y="73" font-size="9" fill="#1a73e8" text-anchor="end">40%</text>
+      <!-- 右轴（异常数） -->
+      <text x="386" y="13" font-size="9" fill="#ff4d4f" text-anchor="start">10</text>
+      <text x="386" y="43" font-size="9" fill="#ff4d4f" text-anchor="start">5</text>
+      <text x="386" y="73" font-size="9" fill="#ff4d4f" text-anchor="start">0</text>
+      <!-- 计费成功率折线 78%→84%→88% 左轴：y=85-(rate-40)/60*75 78%:y=85-47.5=37.5≈38 84%:y=85-55=30 88%:y=85-60=25 -->
+      <polyline points="100,38 210,30 320,25" fill="none" stroke="#1a73e8" stroke-width="2.5"/>
+      <circle cx="100" cy="38" r="3.5" fill="#fff" stroke="#1a73e8" stroke-width="2"/>
+      <circle cx="210" cy="30" r="3.5" fill="#fff" stroke="#1a73e8" stroke-width="2"/>
+      <circle cx="320" cy="25" r="3.5" fill="#fff" stroke="#1a73e8" stroke-width="2"/>
+      <text x="100" y="34" font-size="9" fill="#1a73e8" text-anchor="middle" font-weight="600">78%</text>
+      <text x="210" y="26" font-size="9" fill="#1a73e8" text-anchor="middle" font-weight="600">84%</text>
+      <text x="320" y="21" font-size="9" fill="#1a73e8" text-anchor="middle" font-weight="600">88%</text>
+      <!-- 核对异常折线 7→5→3 右轴：y=85-(10-val)/10*75 7:y=85-22.5=62.5≈63 5:y=85-37.5=47.5≈48 3:y=85-52.5=32.5≈33 -->
+      <polyline points="100,63 210,48 320,33" fill="none" stroke="#ff4d4f" stroke-width="2" stroke-dasharray="5,3"/>
+      <circle cx="100" cy="63" r="3.5" fill="#fff" stroke="#ff4d4f" stroke-width="2"/>
+      <circle cx="210" cy="48" r="3.5" fill="#fff" stroke="#ff4d4f" stroke-width="2"/>
+      <circle cx="320" cy="33" r="3.5" fill="#fff" stroke="#ff4d4f" stroke-width="2"/>
+      <text x="100" y="77" font-size="9" fill="#ff4d4f" text-anchor="middle" font-weight="600">7件</text>
+      <text x="210" y="62" font-size="9" fill="#ff4d4f" text-anchor="middle" font-weight="600">5件</text>
+      <text x="320" y="29" font-size="9" fill="#ff4d4f" text-anchor="middle" font-weight="600">3件</text>
+      <!-- X轴 -->
+      <text x="100" y="96" font-size="10" fill="#8c8c8c" text-anchor="middle">2026-01</text>
+      <text x="210" y="96" font-size="10" fill="#8c8c8c" text-anchor="middle">2026-02</text>
+      <text x="320" y="96" font-size="10" fill="#8c8c8c" text-anchor="middle">2026-03</text>
+    </svg>
+    <div style="font-size:11px;color:#8c8c8c;margin-top:6px;">两线反向收敛 = 系统质量改善；若核对异常下降而成功率不升，需排查其他失败原因</div>
   </div>
 </div>
 
