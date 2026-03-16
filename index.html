@@ -16,6 +16,12 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 .period-tag { background: #e8f0fe; color: #1a73e8; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: 500; }
 .badge { background: #ff4d4f; color: #fff; padding: 3px 8px; border-radius: 12px; font-size: 11px; }
 
+/* Tab 导航 */
+.tab-nav { background: #fff; border-bottom: 2px solid #e8eaed; padding: 0 24px; display: flex; gap: 0; position: sticky; top: 57px; z-index: 99; }
+.tab-btn { padding: 12px 28px; font-size: 13px; font-weight: 500; color: #595959; cursor: pointer; border: none; background: none; border-bottom: 2px solid transparent; margin-bottom: -2px; transition: all .15s; }
+.tab-btn:hover { color: #1a73e8; }
+.tab-btn.active { color: #1a73e8; border-bottom-color: #1a73e8; font-weight: 600; }
+
 /* 主体 */
 .main { padding: 20px 24px; max-width: 1440px; margin: 0 auto; }
 
@@ -87,14 +93,16 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 .line-leg-item { display: flex; align-items: center; gap: 4px; font-size: 10px; color: #595959; }
 .line-leg-dot { width: 20px; height: 2px; border-radius: 1px; }
 
+/* 数据表格 */
+.data-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 12px; }
+.data-table th { background: #f5f7fa; color: #595959; font-weight: 600; padding: 8px 12px; text-align: left; border-bottom: 1px solid #e8eaed; }
+.data-table td { padding: 7px 12px; border-bottom: 1px solid #f5f5f5; color: #1a1a2e; }
+.data-table tr.total-row td { font-weight: 700; background: #fafafa; border-top: 1px solid #e8eaed; }
+.data-table .warn-cell { color: #ff4d4f; font-weight: 600; }
+.data-table .caution-cell { color: #fa8c16; font-weight: 600; }
+
 /* 布局辅助 */
 .row { display: grid; gap: 12px; margin-bottom: 12px; }
-.row-6 { grid-template-columns: repeat(6, 1fr); }
-.row-3-3 { grid-template-columns: 3fr 3fr; }
-.row-4-2 { grid-template-columns: 4fr 2fr; }
-
-.span-2 { grid-column: span 2; }
-.span-3 { grid-column: span 3; }
 
 /* 数据标注 */
 .data-note { text-align: right; font-size: 11px; color: #bfbfbf; margin-bottom: 16px; }
@@ -105,7 +113,7 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 <div class="header">
   <div class="header-left">
     <h1>往来核销运营看板</h1>
-    <p>客户后返 & 订单技术服务费 · 全流程监控</p>
+    <p>客户后返 &amp; 订单技术服务费 · 全流程监控</p>
   </div>
   <div class="header-right">
     <span class="period-tag">📅 统计账期：2026-03</span>
@@ -113,6 +121,209 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   </div>
 </div>
 
+<div class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('mgmt', this)">管理视图</button>
+  <button class="tab-btn" onclick="switchTab('ops', this)">运营视图</button>
+</div>
+
+<!-- ========== 管理视图 ========== -->
+<div id="view-mgmt" class="view-panel">
+<div class="main">
+<p class="data-note">* 数据为示例数据，仅用于看板设计审核</p>
+
+<!-- 核心结果指标 -->
+<div class="section">
+  <div class="section-title">核心结果指标</div>
+  <div class="cards cards-4">
+
+    <div class="card">
+      <div class="card-label">规则覆盖率</div>
+      <div class="card-value success">79%</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill warn" style="width:79%"></div></div>
+      </div>
+      <div class="card-sub" style="margin-top:6px;">已配置 42 / 应配置 53 · 待配置 11</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">计费任务成功率（当期）</div>
+      <div class="card-value success">88.4%</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill high" style="width:88.4%"></div></div>
+      </div>
+      <div class="card-sub" style="margin-top:6px;">成功 38 / 总任务 43</div>
+    </div>
+
+    <div class="card alert">
+      <div class="card-label">⚠️ T+3 核销完成率（目标100%）</div>
+      <div class="card-value" style="color:#ff4d4f;">98%</div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>2025-12账期 · T+3月底截止</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:98%;background:linear-gradient(90deg,#ff4d4f,#ff7875)"></div></div>
+      </div>
+      <div class="card-sub" style="margin-top:6px;"><span class="down">未达100% · 需逐笔跟进</span></div>
+    </div>
+
+    <div class="card alert">
+      <div class="card-label">🔴 超期未核销金额（超T+3）</div>
+      <div class="card-value">3.8<span style="font-size:14px;font-weight:400"> 万</span></div>
+      <div class="card-sub"><span class="down">超截止时点 · 大于0即预警</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 当期风险积压 -->
+<div class="section">
+  <div class="section-title warn">当期风险积压（全量，不限账期）</div>
+  <div class="cards cards-4">
+
+    <div class="card alert">
+      <div class="card-label">🔴 计费失败/有异常数</div>
+      <div class="card-value" style="font-size:36px;">5</div>
+      <div class="card-sub"><span class="down">来源：计费任务实体（待新增）</span></div>
+    </div>
+
+    <div class="card alert">
+      <div class="card-label">🔴 核对异常数</div>
+      <div class="card-value" style="font-size:36px;">3</div>
+      <div class="card-sub"><span class="down">客户后返明细 2 · 技术服务费 1</span></div>
+    </div>
+
+    <div class="card" style="border-left:3px solid #faad14;">
+      <div class="card-label">⚠️ 超期未确认结算单</div>
+      <div class="card-value" style="color:#fa8c16;font-size:36px;">3</div>
+      <div class="card-sub">超过3个工作日未确认（全量）</div>
+    </div>
+
+    <div class="card" style="border-left:3px solid #faad14;">
+      <div class="card-label">⚠️ 超T+1未核销金额</div>
+      <div class="card-value" style="color:#fa8c16;">42.3<span style="font-size:14px;font-weight:400;color:#8c8c8c"> 万</span></div>
+      <div class="card-sub">应收+应付合计 · T+3风险预警</div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 核销T+N完成率 -->
+<div class="section">
+  <div class="section-title green">核销T+N完成率</div>
+  <div class="cards cards-3">
+
+    <div class="card">
+      <div class="card-label">T+1 完成率（过程观测）</div>
+      <div class="card-value" style="color:#1a73e8;">62%</div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>2026-02账期 · T+1月底</span></div>
+        <div class="progress-bar"><div class="progress-fill warn" style="width:62%"></div></div>
+      </div>
+      <div class="card-sub" style="margin-top:6px;">暂不设阈值，待跑数确认</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">T+2 完成率</div>
+      <div class="card-value" style="color:#fa8c16;">85%</div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>2026-01账期 · T+2月底</span></div>
+        <div class="progress-bar"><div class="progress-fill warn" style="width:85%"></div></div>
+      </div>
+      <div class="card-sub" style="margin-top:6px;">低于50%黄色预警</div>
+    </div>
+
+    <div class="card alert">
+      <div class="card-label">⚠️ T+3 完成率（目标100%）</div>
+      <div class="card-value" style="color:#ff4d4f;">98%</div>
+      <div class="progress-wrap">
+        <div class="progress-label"><span>2025-12账期 · 已达截止时点</span></div>
+        <div class="progress-bar"><div class="progress-fill" style="width:98%;background:linear-gradient(90deg,#ff4d4f,#ff7875)"></div></div>
+      </div>
+      <div class="card-sub" style="margin-top:6px;"><span class="down">未达100% · 存在超期余额</span></div>
+    </div>
+
+  </div>
+</div>
+
+<!-- 趋势监控 -->
+<div class="section">
+  <div class="section-title">趋势监控（近3期）</div>
+  <div class="cards cards-3">
+
+    <div class="card chart">
+      <div class="card-title">应收/应付核销完成率趋势</div>
+      <div class="line-legend">
+        <div class="line-leg-item"><div class="line-leg-dot" style="background:#1a73e8"></div>应收</div>
+        <div class="line-leg-item"><div class="line-leg-dot" style="background:#52c41a"></div>应付</div>
+      </div>
+      <svg width="100%" height="80" viewBox="0 0 260 80">
+        <polyline points="20,42 130,32 240,18" fill="none" stroke="#1a73e8" stroke-width="2"/>
+        <circle cx="20" cy="42" r="3" fill="#1a73e8"/>
+        <circle cx="130" cy="32" r="3" fill="#1a73e8"/>
+        <circle cx="240" cy="18" r="3" fill="#1a73e8"/>
+        <text x="20" y="36" font-size="9" fill="#1a73e8" text-anchor="middle">68%</text>
+        <text x="130" y="26" font-size="9" fill="#1a73e8" text-anchor="middle">72%</text>
+        <text x="240" y="12" font-size="9" fill="#1a73e8" text-anchor="middle">76%</text>
+        <polyline points="20,58 130,48 240,40" fill="none" stroke="#52c41a" stroke-width="2" stroke-dasharray="4,2"/>
+        <circle cx="20" cy="58" r="3" fill="#52c41a"/>
+        <circle cx="130" cy="48" r="3" fill="#52c41a"/>
+        <circle cx="240" cy="40" r="3" fill="#52c41a"/>
+        <text x="20" y="72" font-size="9" fill="#52c41a" text-anchor="middle">81%</text>
+        <text x="130" y="62" font-size="9" fill="#52c41a" text-anchor="middle">85%</text>
+        <text x="240" y="54" font-size="9" fill="#52c41a" text-anchor="middle">87.5%</text>
+      </svg>
+      <div class="line-labels">
+        <span class="line-label">2026-01</span>
+        <span class="line-label">2026-02</span>
+        <span class="line-label">2026-03</span>
+      </div>
+    </div>
+
+    <div class="card chart">
+      <div class="card-title">核对异常趋势</div>
+      <svg width="100%" height="80" viewBox="0 0 260 80">
+        <polyline points="20,20 130,35 240,50" fill="none" stroke="#ff4d4f" stroke-width="2"/>
+        <circle cx="20" cy="20" r="3" fill="#ff4d4f"/>
+        <circle cx="130" cy="35" r="3" fill="#ff4d4f"/>
+        <circle cx="240" cy="50" r="3" fill="#ff4d4f"/>
+        <text x="20" y="14" font-size="9" fill="#ff4d4f" text-anchor="middle">7</text>
+        <text x="130" y="29" font-size="9" fill="#ff4d4f" text-anchor="middle">5</text>
+        <text x="240" y="44" font-size="9" fill="#ff4d4f" text-anchor="middle">3</text>
+        <text x="130" y="72" font-size="10" fill="#52c41a" text-anchor="middle">↓ 数据质量持续改善</text>
+      </svg>
+      <div class="line-labels">
+        <span class="line-label">2026-01</span>
+        <span class="line-label">2026-02</span>
+        <span class="line-label">2026-03</span>
+      </div>
+    </div>
+
+    <div class="card chart">
+      <div class="card-title">计费任务成功率趋势</div>
+      <svg width="100%" height="80" viewBox="0 0 260 80">
+        <polyline points="20,50 130,30 240,12" fill="none" stroke="#1a73e8" stroke-width="2"/>
+        <circle cx="20" cy="50" r="3" fill="#1a73e8"/>
+        <circle cx="130" cy="30" r="3" fill="#1a73e8"/>
+        <circle cx="240" cy="12" r="3" fill="#1a73e8"/>
+        <text x="20" y="44" font-size="9" fill="#1a73e8" text-anchor="middle">78%</text>
+        <text x="130" y="24" font-size="9" fill="#1a73e8" text-anchor="middle">84%</text>
+        <text x="240" y="8" font-size="9" fill="#1a73e8" text-anchor="middle">88%</text>
+        <text x="130" y="72" font-size="10" fill="#52c41a" text-anchor="middle">↑ 系统趋稳</text>
+      </svg>
+      <div class="line-labels">
+        <span class="line-label">2026-01</span>
+        <span class="line-label">2026-02</span>
+        <span class="line-label">2026-03</span>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</div><!-- /main mgmt -->
+</div><!-- /view-mgmt -->
+
+
+<!-- ========== 运营视图 ========== -->
+<div id="view-ops" class="view-panel" style="display:none;">
 <div class="main">
 <p class="data-note">* 数据为示例数据，仅用于看板设计审核</p>
 
@@ -186,13 +397,13 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
           <div class="bar-name">明细异常</div>
         </div>
         <div class="bar-item">
-          <div class="bar-val">2</div>
-          <div class="bar-rect orange" style="height:67%"></div>
+          <div class="bar-val">1</div>
+          <div class="bar-rect orange" style="height:33%"></div>
           <div class="bar-name">任务超时</div>
         </div>
         <div class="bar-item">
-          <div class="bar-val">0</div>
-          <div class="bar-rect" style="height:2%;background:#d9d9d9"></div>
+          <div class="bar-val">1</div>
+          <div class="bar-rect" style="height:33%;background:#d9d9d9"></div>
           <div class="bar-name">其他</div>
         </div>
       </div>
@@ -204,46 +415,90 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 <!-- ③ 结算单处理进度 -->
 <div class="section">
   <div class="section-title purple">③ 结算单处理进度</div>
-  <div class="cards" style="grid-template-columns: 160px 1fr 180px;">
+  <div class="cards" style="grid-template-columns: 160px 1fr 180px; margin-bottom:12px;">
 
     <div class="card">
-      <div class="card-label">结算总金额（当期）</div>
+      <div class="card-label">结算总金额</div>
       <div class="card-value blue">476.0<span style="font-size:14px;font-weight:400;color:#8c8c8c"> 万</span></div>
       <div class="card-sub">共 53 张结算单</div>
     </div>
 
     <div class="card chart">
-      <div class="card-title">结算单状态分布（当期）</div>
+      <div class="card-title">结算单状态分布（全量）</div>
       <div class="pie-wrap">
         <svg class="pie-chart" width="80" height="80" viewBox="0 0 80 80">
           <circle cx="40" cy="40" r="28" fill="none" stroke="#52c41a" stroke-width="16"
-            stroke-dasharray="112 66" stroke-dashoffset="0" transform="rotate(-90 40 40)"/>
+            stroke-dasharray="116 60" stroke-dashoffset="0" transform="rotate(-90 40 40)"/>
           <circle cx="40" cy="40" r="28" fill="none" stroke="#faad14" stroke-width="16"
-            stroke-dasharray="37 141" stroke-dashoffset="-112" transform="rotate(-90 40 40)"/>
-          <circle cx="40" cy="40" r="28" fill="none" stroke="#ff4d4f" stroke-width="16"
-            stroke-dasharray="19 159" stroke-dashoffset="-149" transform="rotate(-90 40 40)"/>
+            stroke-dasharray="60 116" stroke-dashoffset="-116" transform="rotate(-90 40 40)"/>
         </svg>
         <div class="pie-legend">
           <div class="legend-item"><span class="legend-dot" style="background:#52c41a"></span>已确认<span class="legend-val">35 (66%)</span></div>
-          <div class="legend-item"><span class="legend-dot" style="background:#faad14"></span>待确认<span class="legend-val">12 (23%)</span></div>
-          <div class="legend-item"><span class="legend-dot" style="background:#ff4d4f"></span>含异常<span class="legend-val">6 (11%)</span></div>
+          <div class="legend-item"><span class="legend-dot" style="background:#faad14"></span>待确认<span class="legend-val">18 (34%)</span></div>
         </div>
       </div>
     </div>
 
     <div class="card alert">
-      <div class="card-label">⚠️ 超期未确认数</div>
+      <div class="card-label">⚠️ 超期未确认数（全量）</div>
       <div class="card-value">3</div>
       <div class="card-sub"><span class="down">超过3个工作日未确认</span></div>
     </div>
 
+  </div>
+
+  <!-- 按账期积压明细 -->
+  <div class="card">
+    <div class="card-title">结算单待确认积压（按账期，全量）</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>账期</th>
+          <th>待确认数</th>
+          <th>其中超期</th>
+          <th>说明</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-11及以前</td>
+          <td class="warn-cell">2</td>
+          <td class="warn-cell">2</td>
+          <td>历史积压，已超期</td>
+        </tr>
+        <tr>
+          <td>2025-12</td>
+          <td class="caution-cell">4</td>
+          <td class="caution-cell">1</td>
+          <td>T+3账期，临近截止</td>
+        </tr>
+        <tr>
+          <td>2026-01</td>
+          <td>5</td>
+          <td>0</td>
+          <td>T+2账期</td>
+        </tr>
+        <tr>
+          <td>2026-02</td>
+          <td>7</td>
+          <td>0</td>
+          <td>T+1账期</td>
+        </tr>
+        <tr class="total-row">
+          <td>合计</td>
+          <td>18</td>
+          <td class="warn-cell">3</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
 <!-- ④ 应收单状态 -->
 <div class="section">
   <div class="section-title">④ 应收单状态</div>
-  <div class="cards cards-4">
+  <div class="cards cards-4" style="margin-bottom:12px;">
 
     <div class="card">
       <div class="card-label">应收总金额（应该收）</div>
@@ -258,7 +513,6 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
     <div class="card alert">
       <div class="card-label">⚠️ 应收未核销余额</div>
       <div class="card-value">68.4<span style="font-size:14px;font-weight:400"> 万</span></div>
-      <div class="card-sub"><span class="down">还没收多少</span></div>
     </div>
 
     <div class="card">
@@ -270,45 +524,80 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
     </div>
 
   </div>
-</div>
 
-<!-- ⑤ 应付单状态 -->
-<div class="section">
-  <div class="section-title">⑤ 应付单状态</div>
-  <div class="cards cards-4">
-
-    <div class="card">
-      <div class="card-label">应付总金额（应该付）</div>
-      <div class="card-value blue">192.0<span style="font-size:14px;font-weight:400;color:#8c8c8c"> 万</span></div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">已付金额（已核销）</div>
-      <div class="card-value success">168.0<span style="font-size:14px;font-weight:400;color:#8c8c8c"> 万</span></div>
-    </div>
-
-    <div class="card alert">
-      <div class="card-label">⚠️ 应付未核销余额</div>
-      <div class="card-value">24.0<span style="font-size:14px;font-weight:400"> 万</span></div>
-      <div class="card-sub"><span class="down">还没付多少</span></div>
-    </div>
-
-    <div class="card">
-      <div class="card-label">应付核销完成率</div>
-      <div class="card-value">87.5%</div>
-      <div class="progress-wrap">
-        <div class="progress-bar"><div class="progress-fill high" style="width:87.5%"></div></div>
-      </div>
-    </div>
-
+  <!-- 应收按账期积压 -->
+  <div class="card">
+    <div class="card-title">应收/应付待核销积压（按账期，全量）</div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>账期</th>
+          <th>T时点状态</th>
+          <th>应收待核销（万）</th>
+          <th>应付待核销（万）</th>
+          <th>合计（万）</th>
+          <th>风险</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>2025-11及以前</td>
+          <td>超T+3截止</td>
+          <td class="warn-cell">2.0</td>
+          <td class="warn-cell">1.8</td>
+          <td class="warn-cell">3.8</td>
+          <td class="warn-cell">🔴 超期</td>
+        </tr>
+        <tr>
+          <td>2025-12</td>
+          <td>T+3月底截止</td>
+          <td class="caution-cell">10.0</td>
+          <td class="caution-cell">6.7</td>
+          <td class="caution-cell">16.7</td>
+          <td class="caution-cell">⚠️ 临近截止</td>
+        </tr>
+        <tr>
+          <td>2026-01</td>
+          <td>已过T+1月底</td>
+          <td class="caution-cell">14.5</td>
+          <td class="caution-cell">7.3</td>
+          <td class="caution-cell">21.8</td>
+          <td class="caution-cell">⚠️ 超T+1</td>
+        </tr>
+        <tr>
+          <td>2026-02</td>
+          <td>T+1月底进行中</td>
+          <td>24.0</td>
+          <td>5.5</td>
+          <td>29.5</td>
+          <td>观测中</td>
+        </tr>
+        <tr>
+          <td>2026-03</td>
+          <td>当期</td>
+          <td>17.9</td>
+          <td>2.7</td>
+          <td>20.6</td>
+          <td>正常</td>
+        </tr>
+        <tr class="total-row">
+          <td>合计</td>
+          <td></td>
+          <td>68.4</td>
+          <td>24.0</td>
+          <td>92.4</td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
 
-<!-- ⑥ 核销完成情况 -->
+<!-- ⑤ 核销完成情况 -->
 <div class="section">
-  <div class="section-title green">⑥ 核销完成情况</div>
+  <div class="section-title green">⑤ 核销完成情况</div>
 
-  <!-- 第一行：类型分布 + 平均周期 -->
+  <!-- 类型分布 + 平均周期 -->
   <div class="cards" style="grid-template-columns: 1fr 160px 160px 160px; margin-bottom:12px;">
 
     <div class="card chart">
@@ -350,7 +639,7 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 
   </div>
 
-  <!-- 第二行：T+N完成率 + 超T+1未核销 -->
+  <!-- T+N完成率 -->
   <div class="cards cards-4">
 
     <div class="card">
@@ -360,7 +649,7 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
         <div class="progress-label"><span>2026-02账期 · T+1月底</span></div>
         <div class="progress-bar"><div class="progress-fill warn" style="width:62%"></div></div>
       </div>
-      <div class="card-sub" style="margin-top:6px;">暂不设预警阈值，待跑数确认</div>
+      <div class="card-sub" style="margin-top:6px;">暂不设阈值，待跑数确认</div>
     </div>
 
     <div class="card">
@@ -370,17 +659,17 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
         <div class="progress-label"><span>2026-01账期 · T+2月底</span></div>
         <div class="progress-bar"><div class="progress-fill warn" style="width:85%"></div></div>
       </div>
-      <div class="card-sub" style="margin-top:6px;">低于50%黄色提醒</div>
+      <div class="card-sub" style="margin-top:6px;">低于50%黄色预警</div>
     </div>
 
     <div class="card alert">
       <div class="card-label">⚠️ T+3 核销完成率（目标100%）</div>
       <div class="card-value" style="color:#ff4d4f;">98%</div>
       <div class="progress-wrap">
-        <div class="progress-label"><span>2025-12账期 · T+3月底</span></div>
+        <div class="progress-label"><span>2025-12账期 · 已达截止时点</span></div>
         <div class="progress-bar"><div class="progress-fill" style="width:98%;background:linear-gradient(90deg,#ff4d4f,#ff7875)"></div></div>
       </div>
-      <div class="card-sub" style="margin-top:6px;"><span class="down">未达100% · 低于截止时点</span></div>
+      <div class="card-sub" style="margin-top:6px;"><span class="down">未达100% · 需逐笔跟进</span></div>
     </div>
 
     <div class="card" style="border-left:3px solid #faad14;">
@@ -391,8 +680,8 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 
   </div>
 
-  <!-- 第三行：超期未核销 -->
-  <div class="cards cards-2" style="margin-top:0;">
+  <!-- 超期未核销 -->
+  <div class="cards cards-2" style="margin-top:12px;">
 
     <div class="card alert">
       <div class="card-label">🔴 超期未核销金额（超T+3截止时点）</div>
@@ -409,9 +698,9 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   </div>
 </div>
 
-<!-- ⑦ 异常积压监控 -->
+<!-- ⑥ 异常积压明细 -->
 <div class="section">
-  <div class="section-title warn">⑦ 异常积压监控</div>
+  <div class="section-title warn">⑥ 异常积压明细</div>
   <div class="cards cards-2">
 
     <div class="card alert">
@@ -431,83 +720,16 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
   </div>
 </div>
 
-<!-- ⑧ 趋势监控 -->
-<div class="section">
-  <div class="section-title">⑧ 趋势监控（近3期）</div>
-  <div class="cards cards-3">
+</div><!-- /main ops -->
+</div><!-- /view-ops -->
 
-    <div class="card chart">
-      <div class="card-title">应收/应付核销完成率趋势</div>
-      <div class="line-legend">
-        <div class="line-leg-item"><div class="line-leg-dot" style="background:#1a73e8"></div>应收</div>
-        <div class="line-leg-item"><div class="line-leg-dot" style="background:#52c41a"></div>应付</div>
-      </div>
-      <svg width="100%" height="80" viewBox="0 0 260 80">
-        <!-- 应收折线 68% → 72% → 76% -->
-        <polyline points="20,42 130,32 240,18" fill="none" stroke="#1a73e8" stroke-width="2"/>
-        <circle cx="20" cy="42" r="3" fill="#1a73e8"/>
-        <circle cx="130" cy="32" r="3" fill="#1a73e8"/>
-        <circle cx="240" cy="18" r="3" fill="#1a73e8"/>
-        <text x="20" y="36" font-size="9" fill="#1a73e8" text-anchor="middle">68%</text>
-        <text x="130" y="26" font-size="9" fill="#1a73e8" text-anchor="middle">72%</text>
-        <text x="240" y="12" font-size="9" fill="#1a73e8" text-anchor="middle">76%</text>
-        <!-- 应付折线 81% → 85% → 87.5% -->
-        <polyline points="20,58 130,48 240,40" fill="none" stroke="#52c41a" stroke-width="2" stroke-dasharray="4,2"/>
-        <circle cx="20" cy="58" r="3" fill="#52c41a"/>
-        <circle cx="130" cy="48" r="3" fill="#52c41a"/>
-        <circle cx="240" cy="40" r="3" fill="#52c41a"/>
-        <text x="20" y="72" font-size="9" fill="#52c41a" text-anchor="middle">81%</text>
-        <text x="130" y="62" font-size="9" fill="#52c41a" text-anchor="middle">85%</text>
-        <text x="240" y="54" font-size="9" fill="#52c41a" text-anchor="middle">87.5%</text>
-      </svg>
-      <div class="line-labels">
-        <span class="line-label">2026-01</span>
-        <span class="line-label">2026-02</span>
-        <span class="line-label">2026-03</span>
-      </div>
-    </div>
-
-    <div class="card chart">
-      <div class="card-title">核对异常趋势</div>
-      <svg width="100%" height="80" viewBox="0 0 260 80">
-        <polyline points="20,20 130,35 240,50" fill="none" stroke="#ff4d4f" stroke-width="2"/>
-        <circle cx="20" cy="20" r="3" fill="#ff4d4f"/>
-        <circle cx="130" cy="35" r="3" fill="#ff4d4f"/>
-        <circle cx="240" cy="50" r="3" fill="#ff4d4f"/>
-        <text x="20" y="14" font-size="9" fill="#ff4d4f" text-anchor="middle">7</text>
-        <text x="130" y="29" font-size="9" fill="#ff4d4f" text-anchor="middle">5</text>
-        <text x="240" y="44" font-size="9" fill="#ff4d4f" text-anchor="middle">3</text>
-        <text x="130" y="72" font-size="10" fill="#52c41a" text-anchor="middle">↓ 数据质量持续改善</text>
-      </svg>
-      <div class="line-labels">
-        <span class="line-label">2026-01</span>
-        <span class="line-label">2026-02</span>
-        <span class="line-label">2026-03</span>
-      </div>
-    </div>
-
-    <div class="card chart">
-      <div class="card-title">计费任务成功率趋势</div>
-      <svg width="100%" height="80" viewBox="0 0 260 80">
-        <polyline points="20,50 130,30 240,12" fill="none" stroke="#1a73e8" stroke-width="2"/>
-        <circle cx="20" cy="50" r="3" fill="#1a73e8"/>
-        <circle cx="130" cy="30" r="3" fill="#1a73e8"/>
-        <circle cx="240" cy="12" r="3" fill="#1a73e8"/>
-        <text x="20" y="44" font-size="9" fill="#1a73e8" text-anchor="middle">78%</text>
-        <text x="130" y="24" font-size="9" fill="#1a73e8" text-anchor="middle">84%</text>
-        <text x="240" y="8" font-size="9" fill="#1a73e8" text-anchor="middle">88%</text>
-        <text x="130" y="72" font-size="10" fill="#52c41a" text-anchor="middle">↑ 系统趋稳</text>
-      </svg>
-      <div class="line-labels">
-        <span class="line-label">2026-01</span>
-        <span class="line-label">2026-02</span>
-        <span class="line-label">2026-03</span>
-      </div>
-    </div>
-
-  </div>
-</div>
-
-</div><!-- /main -->
+<script>
+function switchTab(tab, btn) {
+  document.querySelectorAll('.view-panel').forEach(function(el){ el.style.display='none'; });
+  document.querySelectorAll('.tab-btn').forEach(function(el){ el.classList.remove('active'); });
+  document.getElementById('view-'+tab).style.display='block';
+  btn.classList.add('active');
+}
+</script>
 </body>
 </html>
