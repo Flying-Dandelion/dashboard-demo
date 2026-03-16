@@ -166,12 +166,19 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 <!-- ② 计费执行情况 -->
 <div class="section">
   <div class="section-title orange">② 计费执行情况</div>
-  <div class="cards cards-2" style="grid-template-columns: 200px 1fr;">
+  <div class="cards" style="grid-template-columns: 160px 200px 1fr;">
 
     <div class="card">
-      <div class="card-label">计费任务成功数（当期）</div>
-      <div class="card-value success">38</div>
+      <div class="card-label">完全成功数（当期）</div>
+      <div class="card-value success">36</div>
       <div class="card-sub">总任务 43 &nbsp;|&nbsp; <span class="down">失败 5</span></div>
+    </div>
+
+    <div class="card" style="border-left:3px solid #faad14;">
+      <div class="card-label">⚠️ 部分成功数（有明细漏算）</div>
+      <div class="card-value" style="color:#fa8c16;">2</div>
+      <div class="card-sub"><span style="color:#fa8c16;">任务完成但有明细未生成</span></div>
+      <div class="card-sub" style="margin-top:2px;">需下钻核查异常明细</div>
     </div>
 
     <div class="card chart">
