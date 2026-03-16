@@ -119,25 +119,36 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 <!-- ① 规则覆盖度 -->
 <div class="section">
   <div class="section-title">① 规则覆盖度</div>
-  <div class="cards cards-2" style="grid-template-columns: 200px 1fr;">
+  <div class="cards" style="grid-template-columns: 160px 160px 160px 1fr;">
 
     <div class="card">
-      <div class="card-label">已配置主体数（当期有效）</div>
+      <div class="card-label">总主体数（应配置）</div>
+      <div class="card-value blue">53</div>
+      <div class="card-sub">来源：基础档案系统</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">已配置主体数</div>
       <div class="card-value blue">42</div>
-      <div class="card-sub">总主体数 53 &nbsp;|&nbsp; 覆盖率 <span>79%</span></div>
+      <div class="card-sub">来源：01-规则配置表</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">规则覆盖率</div>
+      <div class="card-value success">79%</div>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill warn" style="width:79%"></div></div>
+      </div>
     </div>
 
     <div class="card chart">
       <div class="card-title">规则状态分布</div>
       <div class="pie-wrap">
         <svg class="pie-chart" width="80" height="80" viewBox="0 0 80 80">
-          <!-- 已配置 42/53 ≈ 79% → 284° -->
           <circle cx="40" cy="40" r="28" fill="none" stroke="#1a73e8" stroke-width="16"
             stroke-dasharray="139 39" stroke-dashoffset="0" transform="rotate(-90 40 40)"/>
-          <!-- 未配置 8/53 ≈ 15% → 54° -->
           <circle cx="40" cy="40" r="28" fill="none" stroke="#faad14" stroke-width="16"
             stroke-dasharray="26 152" stroke-dashoffset="-139" transform="rotate(-90 40 40)"/>
-          <!-- 规则缺失 3/53 ≈ 6% → 20° -->
           <circle cx="40" cy="40" r="28" fill="none" stroke="#ff4d4f" stroke-width="16"
             stroke-dasharray="10 168" stroke-dashoffset="-165" transform="rotate(-90 40 40)"/>
         </svg>
@@ -195,7 +206,13 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 <!-- ③ 结算单处理进度 -->
 <div class="section">
   <div class="section-title purple">③ 结算单处理进度</div>
-  <div class="cards cards-2" style="grid-template-columns: 1fr 200px;">
+  <div class="cards" style="grid-template-columns: 160px 1fr 180px;">
+
+    <div class="card">
+      <div class="card-label">结算总金额（当期）</div>
+      <div class="card-value blue">476.0<span style="font-size:14px;font-weight:400;color:#8c8c8c"> 万</span></div>
+      <div class="card-sub">共 53 张结算单</div>
+    </div>
 
     <div class="card chart">
       <div class="card-title">结算单状态分布（当期）</div>
@@ -314,9 +331,21 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
     </div>
 
     <div class="card">
-      <div class="card-label">平均核销周期</div>
-      <div class="card-value">8.3<span style="font-size:16px;font-weight:400;color:#8c8c8c"> 天</span></div>
-      <div class="card-sub">上期 9.1天 &nbsp;<span>↓ 改善</span></div>
+      <div class="card-label">自动核销平均周期</div>
+      <div class="card-value success">2.1<span style="font-size:16px;font-weight:400;color:#8c8c8c"> 天</span></div>
+      <div class="card-sub">上期 2.4天 &nbsp;<span>↓ 改善</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">人工核销平均周期</div>
+      <div class="card-value" style="color:#fa8c16;">6.8<span style="font-size:16px;font-weight:400;color:#8c8c8c"> 天</span></div>
+      <div class="card-sub">上期 7.3天 &nbsp;<span>↓ 改善</span></div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">抵扣核销平均周期</div>
+      <div class="card-value success">1.3<span style="font-size:16px;font-weight:400;color:#8c8c8c"> 天</span></div>
+      <div class="card-sub">上期 1.5天 &nbsp;<span>↓ 改善</span></div>
     </div>
 
   </div>
