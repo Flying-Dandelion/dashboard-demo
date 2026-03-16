@@ -166,19 +166,18 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
 <!-- ② 计费执行情况 -->
 <div class="section">
   <div class="section-title orange">② 计费执行情况</div>
-  <div class="cards" style="grid-template-columns: 160px 200px 1fr;">
+  <div class="cards cards-2" style="grid-template-columns: 180px 1fr;">
 
     <div class="card">
-      <div class="card-label">完全成功数（当期）</div>
-      <div class="card-value success">36</div>
-      <div class="card-sub">总任务 43 &nbsp;|&nbsp; <span class="down">失败 5</span></div>
+      <div class="card-label">计费任务成功数（当期）</div>
+      <div class="card-value success">38</div>
+      <div class="card-sub">总任务 43</div>
     </div>
 
-    <div class="card" style="border-left:3px solid #faad14;">
-      <div class="card-label">⚠️ 部分成功数（有明细漏算）</div>
-      <div class="card-value" style="color:#fa8c16;">2</div>
-      <div class="card-sub"><span style="color:#fa8c16;">任务完成但有明细未生成</span></div>
-      <div class="card-sub" style="margin-top:2px;">需下钻核查异常明细</div>
+    <div class="card alert">
+      <div class="card-label">🔴 失败或有异常数</div>
+      <div class="card-value">5</div>
+      <div class="card-sub"><span class="down">含明细异常视为失败，需重跑处理</span></div>
     </div>
 
     <div class="card chart">
@@ -186,8 +185,8 @@ body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
       <div class="bar-wrap">
         <div class="bar-item">
           <div class="bar-val">3</div>
-          <div class="bar-rect orange" style="height:100%"></div>
-          <div class="bar-name">数据异常</div>
+          <div class="bar-rect red" style="height:100%"></div>
+          <div class="bar-name">明细异常</div>
         </div>
         <div class="bar-item">
           <div class="bar-val">2</div>
